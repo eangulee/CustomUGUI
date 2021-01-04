@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 //双击按钮
-[AddComponentMenu("UI/DubleClickButton")]
+[AddComponentMenu("UI/DoubleClickButton")]
 public class DoubleClickButton : Button
 {
     [Serializable]
