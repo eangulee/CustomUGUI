@@ -16,6 +16,7 @@ public class AutoRollText : MonoBehaviour
     public Text m_text;
     [Header("延迟时间")] public float delay = 5f;
     [Header("移动速度")] public float speed = .1f;
+    [Header("边界检测允许差值")] public float limitDiff = 5f;
     private float _textWidth;
     private RectTransform _rect;
 
@@ -24,7 +25,7 @@ public class AutoRollText : MonoBehaviour
         set
         {
             m_text.text = value;
-            CalcTextWidth();
+            CalcTextPos();
         }
         get { return m_text.text; }
     }
@@ -39,10 +40,10 @@ public class AutoRollText : MonoBehaviour
 
         m_text.rectTransform.pivot = new Vector2(0, 0.5f);
         // m_text.rectTransform.anchoredPosition = new Vector2(-_rect.sizeDelta.x / 2, 0);
-        CalcTextWidth();
+        CalcTextPos();
     }
 
-    private void CalcTextWidth()
+    private void CalcTextPos()
     {
         // 根据字数 调整 view 宽度
         TextGenerator generator = new TextGenerator();
@@ -90,11 +91,11 @@ public class AutoRollText : MonoBehaviour
                     }
 
                     m_text.rectTransform.anchoredPosition = current;
-                    if (current.x < (pos.x - offset))
+                    if (current.x < (pos.x - offset - limitDiff))
                     {
                         leftDir = false;
                     }
-                    else if (current.x > (pos.x + offset))
+                    else if (current.x >= pos.x + limitDiff)
                     {
                         leftDir = true;
                     }
@@ -110,7 +111,7 @@ public class AutoRollText : MonoBehaviour
                     current.x -= speed;
                     m_text.rectTransform.anchoredPosition = current;
                     yield return null;
-                    if (current.x < (pos.x - offset))
+                    if (current.x < (pos.x - offset - limitDiff))
                     {
                         yield return new WaitForSeconds(delay);
                         current.x = pos.x;
