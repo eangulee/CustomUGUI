@@ -25,6 +25,13 @@ public class SpringGUIMenuOptions
         GameObject lcButton = SpringGUIDefaultControls.CreateLongClickButton(GetStandardResources());
         PlaceUIElementRoot(lcButton, menuCommand);
     }
+    
+    [MenuItem("GameObject/UI/RollText", false, 2001)]
+    public static void AddRollText(MenuCommand menuCommand)
+    {
+        GameObject lcButton = SpringGUIDefaultControls.CreateRollText(GetStandardResources());
+        PlaceUIElementRoot(lcButton, menuCommand);
+    }
 
     private static DefaultControls.Resources s_StandardResources;
     // UnityEditor.UI.MenuOptions

@@ -25,6 +25,22 @@ public class SpringGUIDefaultControls
         return lcButton;
     }
 
+    public static GameObject CreateRollText(DefaultControls.Resources resources)
+    {
+        GameObject rollTxt = DefaultControls.CreateButton(convertToDefaultResources(resources));
+        rollTxt.name = "roll_txt";
+        rollTxt.transform.Find("Text").GetComponent<Text>().text = "滚动文字";
+        Object.DestroyImmediate(rollTxt.GetComponent<Button>());
+        Mask mask = rollTxt.AddComponent<Mask>();
+        mask.showMaskGraphic = false;
+        AutoRollText autoRollText = rollTxt.AddComponent<AutoRollText>();
+        autoRollText.m_text = autoRollText.GetComponentInChildren<Text>();
+        Image image = autoRollText.GetComponent<Image>();
+        image.type = Image.Type.Simple;
+        image.sprite = null;
+        return rollTxt;
+    }
+
     private static DefaultControls.Resources convertToDefaultResources(DefaultControls.Resources resources)
     {
         return resources;
