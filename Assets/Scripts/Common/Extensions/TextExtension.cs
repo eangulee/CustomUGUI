@@ -36,9 +36,9 @@ public static class TextExtension
             CopyFrom(TextComponent.GetGenerationSettings(TextComponent.rectTransform.rect.size)); //获取文本框数据
 
         //获取文本框宽度
-        float boundWidth = Alignment(TextComponent.transform);
+        float boundWidth = TextComponent.rectTransform.sizeDelta.x;//Alignment(TextComponent.transform);
 
-       List<string> charList = StringFormat(text);
+        List<string> charList = StringFormat(text);
         StringBuilder sb = new StringBuilder();
         string str = string.Empty;
         float width;
@@ -133,6 +133,7 @@ public static class TextExtension
         {
             strs.Add(c.ToString());
         }
+
         return strs;
     }
 
